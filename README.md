@@ -1,16 +1,16 @@
-# sample_flutter_firebase_app
+# 概要
+fluterとfirebaseを使った簡単なサンプルアプリです。
+flutterの基本は勉強したけど、そこからどうアプリを作ったらいいからわからない方に、1つの例として参考になればと思ってます。
+androidアプリ用のシミュレーターで確認しています。
 
-A new Flutter project.
+# 主な機能
+- 「トップ」、「一覧」、「登録」、「更新」の4画面で構成され、コメントの登録、編集、削除、一覧表示ができます。
+- 新しいバージョンが出た際に、強制バージョンアップを促すことができます。
 
-## Getting Started
+# 使い方
+- を参考にしてください。
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# 注意
+- Flutter初心者が作ってるので、もっといい設計やソースがあると思います。簡単なアプリを作る際の参考にしてください。
+- パッと見て理解しやすいように、あえてシンプルな構成とソースにしています。
+- 実際にアプリを作る際は、クラスを細分化したり、固定の表示文言を別ファイルでまとめて管理するなどした方がよいですし、大規模アプリを作る場合は、構成から見直す必要があると思います。

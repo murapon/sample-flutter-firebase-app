@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../storage/DBComment.dart';
+import '../../storage/DBMemo.dart';
 
-class CommentListPage extends StatefulWidget {
+class MemoListPage extends StatefulWidget {
   final arguments;
 
-  const CommentListPage({this.arguments});
+  const MemoListPage({this.arguments});
 
   @override
-  _CommentListPageState createState() => _CommentListPageState();
+  _MemoListPageState createState() => _MemoListPageState();
 }
 
-class _CommentListPageState extends State<CommentListPage> {
-  List displayComments = [];
+class _MemoListPageState extends State<MemoListPage> {
+  List displayMemoList = [];
 
   @override
   void initState() {
@@ -42,7 +42,7 @@ class _CommentListPageState extends State<CommentListPage> {
       body: Column(
         children: <Widget>[
           (() {
-            if (displayComments.isNotEmpty) {
+            if (displayMemoList.isNotEmpty) {
               return Expanded(
                 child: Scrollbar(
                   isAlwaysShown: true, // true: スクロール時以外もバーを表示する
@@ -52,17 +52,17 @@ class _CommentListPageState extends State<CommentListPage> {
                       child: ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: displayComments.length,
+                        itemCount: displayMemoList.length,
                         itemBuilder: (context, index) {
-                          var comment = displayComments[index];
+                          var memo = displayMemoList[index];
                           return Container(
                             child: ListTile(
                               title: Text(
-                                comment['comment'],
+                                memo['memo'],
                               ),
                               onTap: () {
-                                Navigator.pushNamed(context, '/comment_detail', arguments: {
-                                  'doc_id': comment['doc_id'],
+                                Navigator.pushNamed(context, '/memo_detail', arguments: {
+                                  'doc_id': memo['doc_id'],
                                 });
                               },
                             ),
@@ -74,7 +74,7 @@ class _CommentListPageState extends State<CommentListPage> {
                 ),
               );
             } else {
-              return const Center(child: Text('コメントはありません'));
+              return const Center(child: Text('メモはありません'));
             }
           })(),
         ],
@@ -85,15 +85,15 @@ class _CommentListPageState extends State<CommentListPage> {
   void _load() async {
     FirebaseAuth firebaseAuth = FirebaseAuth.instance;
     var uid = firebaseAuth.currentUser?.uid;
-    DBComment dbComment = DBComment();
-    var dbComments = await dbComment.getList(uid);
+    DBMemo dbMemo = DBMemo();
+    var memoList = await dbMemo.getList(uid);
     WidgetsBinding.instance?.addPostFrameCallback((_) {
       setState(() {
-        for (final dbComment in dbComments) {
-          var comment = dbComment.data();
-          displayComments.add({
-            'doc_id': dbComment.id,
-            'comment': comment['comment'],
+        for (final memo in memoList) {
+          var memoData = memo.data();
+          displayMemoList.add({
+            'doc_id': memo.id,
+            'memo': memoData['memo'],
           });
         }
       });

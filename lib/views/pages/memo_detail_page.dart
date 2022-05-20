@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-import '../../storage/DBComment.dart';
+import '../../storage/DBMemo.dart';
 
-class CommentDetailPage extends StatefulWidget {
+class MemoDetailPage extends StatefulWidget {
   final arguments;
 
-  const CommentDetailPage({this.arguments});
+  const MemoDetailPage({this.arguments});
 
   @override
-  _CommentDetailPageState createState() => _CommentDetailPageState();
+  _MemoDetailPageState createState() => _MemoDetailPageState();
 }
 
-class _CommentDetailPageState extends State<CommentDetailPage> {
+class _MemoDetailPageState extends State<MemoDetailPage> {
   late Map _request;
-  String displayComment = '';
+  String displayMemo = '';
 
   @override
   void initState() {
@@ -32,7 +32,7 @@ class _CommentDetailPageState extends State<CommentDetailPage> {
           iconSize: 30,
           onPressed: () => setState(
             () {
-              Navigator.pushNamed(context, '/comment_list');
+              Navigator.pushNamed(context, '/memo_list');
             },
           ),
         ),
@@ -40,14 +40,14 @@ class _CommentDetailPageState extends State<CommentDetailPage> {
       body: Center(
         child: Column(
           children: <Widget>[
-            Text(displayComment),
+            Text(displayMemo),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 ElevatedButton(
                   child: const Text('変更'),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/comment_update', arguments: {'doc_id': _request['doc_id']});
+                    Navigator.pushNamed(context, '/memo_update', arguments: {'doc_id': _request['doc_id']});
                   },
                 ),
                 ElevatedButton(
@@ -67,9 +67,9 @@ class _CommentDetailPageState extends State<CommentDetailPage> {
                             OutlinedButton(
                                 child: const Text('OK'),
                                 onPressed: () {
-                                  DBComment dbComment = DBComment();
-                                  dbComment.delete(_request['doc_id']);
-                                  Navigator.pushNamed(context, '/comment_list');
+                                  DBMemo dbMemo = DBMemo();
+                                  dbMemo.delete(_request['doc_id']);
+                                  Navigator.pushNamed(context, '/memo_list');
                                 }),
                           ],
                         );
@@ -86,10 +86,10 @@ class _CommentDetailPageState extends State<CommentDetailPage> {
   }
 
   void load() async {
-    // コメント取得
-    DBComment dbComment = DBComment();
-    var comment = await dbComment.get(_request['doc_id']);
-    displayComment = comment!['comment'];
+    // メモ取得
+    DBMemo dbMemo = DBMemo();
+    var memo = await dbMemo.get(_request['doc_id']);
+    displayMemo = memo!['memo'];
     setState(() {});
   }
 }

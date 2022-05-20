@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-import '../../storage/DBComment.dart';
+import '../../storage/DBMemo.dart';
 import '../widgets/ShowDialog.dart';
 
-class CommentUpdatePage extends StatefulWidget {
+class MemoUpdatePage extends StatefulWidget {
   final arguments;
 
-  const CommentUpdatePage({this.arguments});
+  const MemoUpdatePage({this.arguments});
 
   @override
-  _CommentUpdatePageState createState() => _CommentUpdatePageState();
+  _MemoUpdatePageState createState() => _MemoUpdatePageState();
 }
 
-class _CommentUpdatePageState extends State<CommentUpdatePage> {
+class _MemoUpdatePageState extends State<MemoUpdatePage> {
   late Map _request;
-  String comment = '';
+  String memo = '';
 
   @override
   void initState() {
@@ -32,20 +32,20 @@ class _CommentUpdatePageState extends State<CommentUpdatePage> {
           children: <Widget>[
             TextField(
               maxLength: 50,
-              controller: TextEditingController(text: comment), //ここに初期値
+              controller: TextEditingController(text: memo), //ここに初期値
               onChanged: (value) {
-                comment = value;
+                memo = value;
               },
             ),
             ElevatedButton(
               child: const Text('変更'),
               onPressed: () async {
-                if (comment == '') {
+                if (memo == '') {
                   ShowDialog.displayConfirmDialog(context, 'エラーメッセージ');
                 } else {
-                  DBComment dbComment = DBComment();
-                  dbComment.update(_request['doc_id'], comment);
-                  Navigator.pushNamed(context, '/comment_detail', arguments: {
+                  DBMemo dbMemo = DBMemo();
+                  dbMemo.update(_request['doc_id'], memo);
+                  Navigator.pushNamed(context, '/memo_detail', arguments: {
                     'doc_id': _request['doc_id'],
                   });
                 }
@@ -58,10 +58,10 @@ class _CommentUpdatePageState extends State<CommentUpdatePage> {
   }
 
   void load() async {
-    // コメント取得
-    DBComment dbComment = DBComment();
-    var data = await dbComment.get(_request['doc_id']);
-    comment = data!['comment'];
+    // メモ取得
+    DBMemo dbMemo = DBMemo();
+    var data = await dbMemo.get(_request['doc_id']);
+    memo = data!['memo'];
     setState(() {});
   }
 }

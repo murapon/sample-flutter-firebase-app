@@ -4,10 +4,10 @@ import 'package:package_info/package_info.dart';
 
 import 'cache/CacheAppVersion.dart';
 import 'storage/DBAppVersion.dart';
-import 'views/pages/comment_detail_page.dart';
-import 'views/pages/comment_list_page.dart';
-import 'views/pages/comment_register_page.dart';
-import 'views/pages/comment_update_page.dart';
+import 'views/pages/memo_detail_page.dart';
+import 'views/pages/memo_list_page.dart';
+import 'views/pages/memo_register_page.dart';
+import 'views/pages/memo_update_page.dart';
 import 'views/pages/default_page.dart';
 import 'views/pages/top_page.dart';
 import 'views/pages/version_up_page.dart';
@@ -65,14 +65,14 @@ class _MyHomePageState extends State<MyApp> {
               return MaterialPageRoute(builder: (_) => DefaultPage());
             case '/top':
               return MaterialPageRoute(builder: (_) => TopPage(arguments: settings.arguments));
-            case '/comment_list':
-              return MaterialPageRoute(builder: (_) => CommentListPage());
-            case '/comment_detail':
-              return MaterialPageRoute(builder: (_) => CommentDetailPage(arguments: settings.arguments));
-            case '/comment_register':
-              return MaterialPageRoute(builder: (_) => CommentRegisterPage());
-            case '/comment_update':
-              return MaterialPageRoute(builder: (_) => CommentUpdatePage(arguments: settings.arguments));
+            case '/memo_list':
+              return MaterialPageRoute(builder: (_) => MemoListPage());
+            case '/memo_detail':
+              return MaterialPageRoute(builder: (_) => MemoDetailPage(arguments: settings.arguments));
+            case '/memo_register':
+              return MaterialPageRoute(builder: (_) => MemoRegisterPage());
+            case '/memo_update':
+              return MaterialPageRoute(builder: (_) => MemoUpdatePage(arguments: settings.arguments));
           }
         });
   }

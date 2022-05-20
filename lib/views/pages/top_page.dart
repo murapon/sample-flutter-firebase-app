@@ -26,14 +26,14 @@ class _TopPageState extends State<TopPage> {
               icon: const Icon(Icons.add),
               label: const Text('登録する'),
               onPressed: () {
-                Navigator.pushNamed(context, '/comment_register', arguments: {});
+                Navigator.pushNamed(context, '/memo_register', arguments: {});
               },
             ),
             ElevatedButton.icon(
               icon: const Icon(Icons.list),
               label: const Text('一覧'),
               onPressed: () {
-                Navigator.pushNamed(context, '/comment_list', arguments: {});
+                Navigator.pushNamed(context, '/memo_list', arguments: {});
               },
             ),
           ],
